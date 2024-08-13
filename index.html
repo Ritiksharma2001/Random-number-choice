@@ -40,7 +40,6 @@
 
 <div id="container">
     <h1>Number Prediction Game</h1>
-    <div id="random-number">10</div>
     
     <div>
         <label for="number-select">Choose a number:</label>
@@ -54,30 +53,34 @@
         <button id="predict-button">Predict</button>
     </div>
     
+    <div id="random-number">?</div>
     <div id="prediction-result"></div>
 </div>
 
 <script>
     const numbers = [10, 12, 16, 19, 20];
-    let currentRandomNumber;
 
     function generateRandomNumber() {
         const randomIndex = Math.floor(Math.random() * numbers.length);
-        currentRandomNumber = numbers[randomIndex];
-        document.getElementById('random-number').textContent = currentRandomNumber;
+        return numbers[randomIndex];
     }
 
     document.getElementById('predict-button').addEventListener('click', function() {
         const selectedNumber = parseInt(document.getElementById('number-select').value, 10);
-        const resultMessage = selectedNumber === currentRandomNumber ? "You won!" : "Bad luck! Try again next time.";
+        const generatedNumber = generateRandomNumber();
+        const resultMessage = selectedNumber === generatedNumber ? "You won!" : "Bad luck! Try again next time.";
+        
+        // Display the generated number and result
+        document.getElementById('random-number').textContent = generatedNumber;
         document.getElementById('prediction-result').textContent = resultMessage;
+
+        // Clear the result and hide the generated number after 15 seconds
+        setTimeout(function() {
+            document.getElementById('random-number').textContent = '?';
+            document.getElementById('prediction-result').textContent = '';
+        }, 15000);
     });
 
-    // Generate a random number immediately when the page loads
-    generateRandomNumber();
-
-    // Generate a new random number every 10 seconds
-    setInterval(generateRandomNumber, 10000);
 </script>
 
 </body>
