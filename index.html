@@ -78,14 +78,14 @@
         setTimeout(function() {
             document.getElementById('random-number').textContent = '?';
             document.getElementById('prediction-result').textContent = '';
-        }, 10000);
+        }, 20000);
     });
 
     // Automatically generate a new color every 10 seconds
     setInterval(function() {
         const generatedColor = generateRandomColor();
         document.getElementById('random-number').textContent = generatedColor;
-    }, 10000);
+    }, 200000);
 </script>
 
 </body>
