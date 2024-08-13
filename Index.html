@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Prediction Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        #container {
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #random-number {
+            font-size: 2em;
+            margin: 20px 0;
+            color: #333;
+        }
+
+        #prediction-result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div id="container">
+    <h1>Number Prediction Game</h1>
+    <div id="random-number">10</div>
+    
+    <div>
+        <label for="number-select">Choose a number:</label>
+        <select id="number-select">
+            <option value="10">10</option>
+            <option value="12">12</option>
+            <option value="16">16</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+        </select>
+        <button id="predict-button">Predict</button>
+    </div>
+    
+    <div id="prediction-result"></div>
+</div>
+
+<script>
+    const numbers = [10, 12, 16, 19, 20];
+    let currentRandomNumber;
+
+    function generateRandomNumber() {
+        const randomIndex = Math.floor(Math.random() * numbers.length);
+        currentRandomNumber = numbers[randomIndex];
+        document.getElementById('random-number').textContent = currentRandomNumber;
+    }
+
+    document.getElementById('predict-button').addEventListener('click', function() {
+        const selectedNumber = parseInt(document.getElementById('number-select').value, 10);
+        const resultMessage = selectedNumber === currentRandomNumber ? "You won!" : "Bad luck! Try again next time.";
+        document.getElementById('prediction-result').textContent = resultMessage;
+    });
+
+    // Generate a random number immediately when the page loads
+    generateRandomNumber();
+
+    // Generate a new random number every 10 seconds
+    setInterval(generateRandomNumber, 10000);
+</script>
+
+</body>
+</html>
