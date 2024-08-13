@@ -58,29 +58,34 @@
 </div>
 
 <script>
-    const numbers = [blue, red, green, white, yellow];
+    const colors = ['blue', 'red', 'green', 'white', 'yellow'];
 
-    function generateRandomNumber() {
-        const randomIndex = Math.floor(Math.random() * numbers.length);
-        return numbers[randomIndex];
+    function generateRandomColor() {
+        const randomIndex = Math.floor(Math.random() * colors.length);
+        return colors[randomIndex];
     }
 
     document.getElementById('predict-button').addEventListener('click', function() {
-        const selectedNumber = parseInt(document.getElementById('number-select').value, 10);
-        const generatedNumber = generateRandomNumber();
-        const resultMessage = selectedNumber === generatedNumber ? "You won!" : "Bad luck! Try again next time.";
+        const selectedColor = document.getElementById('number-select').value;
+        const generatedColor = generateRandomColor();
+        const resultMessage = selectedColor === generatedColor ? "You won!" : "Bad luck! Try again next time.";
         
-        // Display the generated number and result
-        document.getElementById('random-number').textContent = generatedNumber;
+        // Display the generated color and result
+        document.getElementById('random-number').textContent = generatedColor;
         document.getElementById('prediction-result').textContent = resultMessage;
 
-        // Clear the result and hide the generated number after 15 seconds
+        // Clear the result and hide the generated color after 10 seconds
         setTimeout(function() {
             document.getElementById('random-number').textContent = '?';
             document.getElementById('prediction-result').textContent = '';
-        }, 25000);
+        }, 10000);
     });
 
+    // Automatically generate a new color every 10 seconds
+    setInterval(function() {
+        const generatedColor = generateRandomColor();
+        document.getElementById('random-number').textContent = generatedColor;
+    }, 10000);
 </script>
 
 </body>
